@@ -51,13 +51,13 @@ we should provide the energy providers with a way to join the platform and find 
 
 
 #### input page:
-<img src="img/index.png" width="960" height="540">
+<img src="img/index.png" width="960">
 
 #### custom made optimal energy infrastructure:
-<img src="img/infrastructure.jpg" width="960" height="540">
+<img src="img/infrastructure.jpg" width="960">
 
 #### clicking on the items gives extra information (with, if relevant, options to connect to closely located companies)
-<img src="img/geotermal.jpg" width="960" height="540">
+<img src="img/geotermal.jpg" width="960">
 
 
 ## Getting started
