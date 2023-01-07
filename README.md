@@ -75,7 +75,7 @@ pip install flask
 # run 'server' 
 py app.py
 
-#-- go to http://localhost:5000/ 
+# go to http://localhost:5000/ 
 ```
 
 Made by Milan Weitenberg. [See my linkedin.](https://www.linkedin.com/in/mnweitenberg/)
