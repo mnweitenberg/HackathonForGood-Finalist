@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>GreenNet</title>
+	<meta charset="utf-8">
+	<link rel = "stylesheet" href = "../static/css/general_style.css">
+	<link rel = "stylesheet" href = "../static/css/results_style.css">
+</head>
+<body>
+	<div id="column_results">
+		<h1>optimal energy infrastructure</h1>
+		<h2>energy needs</h2>
+		<table>
+			<tr>
+				<td><b>crop</b></td>
+				<td class="align_right"><b>quantity</b></td>
+				<td class="align_right"><b>lighting (kWh)</b></td>
+				<td class="align_right"><b>heating (kWh)</b></td>
+			</tr>
+			<tr>
+				<td>cucumbers</td>
+				<td class="align_right">{{ cucumber }}</td>
+				<td class="align_right">{{ cucumber_lights }}</td>
+				<td class="align_right">{{ cucumber_heat }}</td>
+			</tr>
+			<tr>
+				<td>tomatoes</td>
+				<td class="align_right">{{ tomato }}</td>
+				<td class="align_right">{{ tomato_lights }}</td>
+				<td class="align_right">{{ tomato_heat }}</td>
+			</tr>
+		</table>
+		<br>
+		to produce these quantities you will need <b>{{ total_energy }}</b> kWh
+
+		<h2>optimal infrastructure</h2>
+		<table class="link_table">
+			<tr style="background-color: rgb(222, 230, 219);">
+				<td style="width:120px;"><b>item</b></td>
+				<td><b>energy</b></td>
+				<td><b>acquisition costs</b></td>
+				<td><b>operational costs</b></td>
+			</tr>
+			<tr id='co2_link' onclick="toggle_visibility('co2_link', 'co2');">
+				<td>CO2 pipeline</td>
+				<td class="align_right">-</td>
+				<td class="align_right"><span class="float_left">€</span> -</td>
+				<td class="align_right"><span class="float_left">€</span> -</td>
+			</tr>
+			<tr id='gas_link' onclick="toggle_visibility('gas_link', 'gas');">
+				<td>gas</td>
+				<td class="align_right">{{ gas_energy }}</td>
+				<td class="align_right"><span class="float_left">€</span> 0</td>
+				<td class="align_right"><span class="float_left">€</span> {{ future_expenses }}</td>
+			</tr>
+			<tr id='geotermal_heat_link' onclick="toggle_visibility('geotermal_heat_link', 'geotermal_heat');">
+				<td>geotermal heat</td>
+				<td class="align_right">{{ heat_pump_energy }}</td>
+				<td class="align_right"><span class="float_left">€</span> 15,000</td>
+				<td class="align_right"><span class="float_left">€</span> 0</td>
+			</tr>
+			<tr id='geotermal_power_link' onclick="toggle_visibility('geotermal_power_link', 'geotermal_power');">
+				<td>geotermal power</td>
+				<td class="align_right">-</td>
+				<td class="align_right"><span class="float_left">€</span> -</td>
+				<td class="align_right"><span class="float_left">€</span> -</td>
+			</tr>
+			<tr id='heat_net_link' onclick="toggle_visibility('heat_net_link', 'heat_net');">
+				<td>heat net</td>
+				<td class="align_right">{{ heat_net_energy }}</td>
+				<td class="align_right"><span class="float_left">€</span> 20,000
+				</td>
+				<td class="align_right"><span class="float_left">€</span> 0</td>
+			</tr>
+			<tr id='solar_link' onclick="toggle_visibility('solar_link', 'solar');">
+				<td>solar panels</td>
+				<td class="align_right">{{ solar_energy }}</td>
+				<td class="align_right"><span class="float_left">€</span> 10,000</td>
+				<td class="align_right"><span class="float_left">€</span> 0</td>
+			</tr>
+			<tr style="background-color: rgb(222, 230, 219);">
+				<td><b>total</b></td>
+				<td class="align_right"><b>{{ total_energy }}</b></td>
+				<td class="align_right"><b><span class="float_left">€</span> {{ total_investment }} </b></td>
+				<td class="align_right"><b><span class="float_left">€</span> {{ future_expenses }} </b></td>
+			</tr>
+		</table>
+		<br>
+		click on each item for more info
+
+		<h2>timeframe</h2>
+		<table>
+			<tr>
+				<td style="width: 100px;">current expenses</td>
+				<td style="width: 60px;" class="align_right"><span class="float_left">€</span> {{ current_expenses }}</td>
+				<td class="bar"><div class="bar_fill_full"></div></td>
+			</tr>
+			<tr>
+				<td>future expenses</td>
+				<td class="align_right"><span class="float_left">€</span> {{ future_expenses }}</td>
+				<td class="bar"><div style="width:{{ future_expenses_percentage }}%;" class="bar_fill"></div></td>
+			</tr>
+			<tr>
+				<td>yearly savings</td>
+				<td class="align_right"><span class="float_left">€</span> {{ savings }}</td>
+				<td class="bar"><div style="width:{{ savings_percentage }}%;" class="bar_fill"></div></td>
+			</tr>
+		</table>
+		<br>
+		This means that the initial investment of {{ total_investment }} will be recouped in {{ recoupment }} years
+
+		<h2>CO2 emmisions</h2>
+		<table>
+			<tr>
+				<td style="width: 100px;">current emissions</td>
+				<td class="align_right" style="width: 60px;" >{{ old_emissions }} kg</td>
+				<td class="bar"><div class="bar_fill_full"></div></td>
+			</tr>
+			<tr>
+				<td>future emissions</td>
+				<td class="align_right">{{ future_emission }} kg</td>
+				<td class="bar"><div style="width:{{ future_emission_percentage }}%;"  class="bar_fill"></div></td>
+			</tr>
+		</table>
+		<br>
+		By changing your energy infrastructure you will accomplish a reduction of {{ co_reduction }} % in CO2 emissions.
+
+		<h2>download results</h2>
+		<a class="download_link" href="downloads/results.pdf" target="_blank">
+			pdf<br>
+			<img class="float_left" src="../static/img/pdf.jpg" alt="pdf">
+		</a>
+		<a class="download_link" href="downloads/results.xlsx">
+			excel<br>
+			<img class="float_left" src="../static/img/excel.jpg" alt="excel">
+		</a>
+
+	</div>
+
+	<div id="co2" class="column_energy_solution">
+		<h1>CO2 pipeline</h1>
+		<img class="solution_img" src="../static/img/co2.jpg" alt="co2 pipeline">
+		<p>
+			With the CO2 Next project, the goal is to build terminals in the Port of Rotterdam where CO2 is converted from a gas to a liquid. This liquid
+			CO2 will than be transported by land or waterway to consumers who are not connected to CO2 pipelines. CO2 Next will be connected with projects like Aramis to get their CO2. In the initial phase of the project it is expected that the terminal capacity is approximately 3.8 Mt per year (CO2 Next, 2022).
+		</p>
+		<a href="https://www.dropbox.com/s/oalhho97iv3fhmf/JIP_final_report.pdf?dl=0" target="black" class="float_right">more info</a>
+	</div>
+	
+	<div id="gas" class="column_energy_solution">
+		<h1>gas</h1>
+		<img class="solution_img" src="../static/img/gas.jpg" alt="">
+		<p>
+			{{ future_emission_percentage }} % of your energy needs will still be 
+			generated by gas. There are however
+			<a href="https://www.warmteatlas.nl/viewer/app/Warmteatlas/v2" target="blank">more sustainable initiatives</a>.
+		</p>
+		<a href="https://www.dropbox.com/s/oalhho97iv3fhmf/JIP_final_report.pdf?dl=0" target="black" class="float_right">more info</a>
+	</div>
+
+	<div id="geotermal_heat" class="column_energy_solution">
+		<h1>geotermal heat</h1>
+		<img class="solution_img" src="../static/img/geo_heat.jpg" alt="">
+		<div class="legenda">
+			<div class="legenda_img" style="background-color: red;"></div>
+			<div class="legenda_expl">heat pump</div>
+		</div>
+		<p>
+			Click on heat pumps on the map to receive contact information.
+			<br><br>
+			Your next steps will be:
+			<br> 1. Get in touch with ... 
+			<br> 2. Etc
+		</p>
+		<a href="https://www.dropbox.com/s/oalhho97iv3fhmf/JIP_final_report.pdf?dl=0" target="black" class="float_right">more info</a>
+	</div>
+
+	<div id="geotermal_power" class="column_energy_solution">
+		<h1>geotermal power</h1>
+		<img class="solution_img" src="../static/img/geo_power.jpg" alt="">
+		<div class="legenda">
+			<div class="legenda_img" style="background-color: #aace86;"></div>
+			<div class="legenda_expl">licence to investigate geotermal energy options</div>
+		</div>
+		<div class="legenda" style="margin-top: -10px;">
+			<div class="legenda_img" style="background-color: #e299e1;"></div>
+			<div class="legenda_expl">licence to use geotermal energy</div>
+		</div>
+		<p>
+			You are licensed to investigate geotermal power generation in 
+			your location.
+			<br><br>
+			Your next steps will be:
+			<br> 1. Get in touch with ... 
+			<br> 2. Etc
+		</p>
+		<a href="https://www.dropbox.com/s/oalhho97iv3fhmf/JIP_final_report.pdf?dl=0" target="black" class="float_right">more info</a>
+	</div>
+
+	<div id="heat_net" class="column_energy_solution">
+		<h1>heat net</h1>
+		<img class="solution_img" src="../static/img/heatnet.jpg" alt="">
+		<div class="legenda">
+			<div class="legenda_img" style="background-color: #b736b0;"></div>
+			<div class="legenda_expl">heat net available</div>
+		</div>
+		<p>
+			A big advantage of the high distribution, with relatively low power outputs, is the expensive and extensive infrastructure needed to capture all this heat. An example of a large waste heat source in the West-Holland area is the HHS van Delfland in Midden-Delfland. HHS van Delfland has the capacity to deliver over 1500 MWh on a daily basis, in winter but also in summer. 
+			<br><br>
+			Your next steps will be:
+			<br> 1. Get in touch with ... 
+			<br> 2. Etc
+		</p>
+		<a href="https://www.dropbox.com/s/oalhho97iv3fhmf/JIP_final_report.pdf?dl=0" target="black" class="float_right">more info</a>
+	</div>
+
+	<div id="solar" class="column_energy_solution">
+		<h1>solar panels</h1>
+		<img class="solution_img" src="../static/img/solar.jpg" alt="solar">
+		<div class="legenda">
+			<div class="legenda_img" style="background-color: red;"></div>
+			<div class="legenda_expl">available space for solar panels</div>
+		</div>
+		<p>
+			There is room for 26 solar panels on your roof. This would generate {{ solar_energy }} kWh on year basis
+			<br><br>
+			Your next steps will be:
+			<br> 1. Get in touch with ... 
+			<br> 2. Etc
+		</p>
+		<a href="https://www.dropbox.com/s/oalhho97iv3fhmf/JIP_final_report.pdf?dl=0" target="black" class="float_right">more info</a>
+	</div>
+
+	<script type="text/javascript">
+		function toggle_visibility(link, solution) {
+			co2.style.display = 'none';
+			co2_link.style.color = 'var(--main_color)';
+			co2_link.style.backgroundColor = 'var(--grey)';
+			gas.style.display = 'none';
+			gas_link.style.color = 'var(--main_color)';
+			gas_link.style.backgroundColor = 'var(--grey)';
+			geotermal_heat.style.display = 'none';
+			geotermal_heat_link.style.color = 'var(--main_color)';
+			geotermal_heat_link.style.backgroundColor = 'var(--grey)';
+			geotermal_power.style.display = 'none';
+			geotermal_power_link.style.color = 'var(--main_color)';
+			geotermal_power_link.style.backgroundColor = 'var(--grey)';
+			heat_net.style.display = 'none';
+			heat_net_link.style.color = 'var(--main_color)';
+			heat_net_link.style.backgroundColor = 'var(--grey)';
+			solar.style.display = 'none';
+			solar_link.style.color = 'var(--main_color)';
+			solar_link.style.backgroundColor = 'var(--grey)';
+			var e = document.getElementById(solution);
+			e.style.display = 'block';
+			var f = document.getElementById(link);
+			f.style.color = 'white';
+			f.style.backgroundColor = 'var(--main_color)';
+		}
+	 </script>
+</body>
+</html>

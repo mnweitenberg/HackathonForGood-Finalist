@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>GreenNet</title>
+	<meta charset="utf-8">
+	<link rel = "stylesheet" href = "../static/css/general_style.css">
+	<link rel = "stylesheet" href = "../static/css/index_style.css">
+</head>
+<body>
+	<div id="column_info">
+		<p>
+			"Due to fluctuating prices of natural gas and uncertainty in the future supply of electricity, heat and
+			CO2, greenhouses in the West-Holland region are struggling to remain competitive with decreased
+			security of supply, all whilst striving to meet the horticulture sector’s goal of becoming carbon neutral
+			by 2040. Their infrastructure and behaviour must be adapted to meet these goals whilst remaining a
+			profitable, and industry-leading sector. After this, the scope of the project is discussed and the various
+			sustainability goals are mentioned."
+		<p>
+		</p>
+			The recommendations present the technologies which were found to be the easiest and cheapest to
+			implement to satisfy the carbon-neutrality constraint of the problem. The highest energetic requirement,
+			Heat is recommended to be covered by a small part of Biogas in CHP plants, dominant geothermal
+			energy combined with thermal storage, and through the import of Harbour heat with provenance from
+			WarmtelinQ and Europoort projects. Electricity is recommended to be supplied by low-cost investments
+			in wind and solar power. Since heat supply is produced in part from biogas combustion, electricity is
+			produced in equal parts and can be used to supplement the base-load electricity supply or exported to
+			the grid (creating added value to the system). Finally, the required CO2 could partially be produced
+			in CHP plants run on biogas. A second important source of CO2 is the OCAP pipeline, where it is
+			recommended to increase their affinity and get a more optimized schedule of the CO2 supply by the
+			source		
+		</p>
+		<img class="float_right" src="../static/img/logo_greenport.png" alt="Greenport logo">
+	</div>
+
+	<div id="column_input">
+		<div id="colum_title">
+			<h2>fill in the form to generate your optimal energy setup</h2>
+		</div>
+
+		<form action = "results" method = "post">
+			<div class="input_block">
+				<b>company</b>
+				<input style="width: 100%;" required name="company" />
+			</div>
+
+			<div class="input_block">
+				<b>crops</b>
+				<div class="input_field">
+					<label>cucumber</label>
+					<input class="float_right" required placeholder="greenhouse area(m³)" name="cucumber" />
+				</div>
+				<div class="input_field">
+					<label>tomato</label>
+					<input class="float_right" required placeholder="greenhouse area(m³)" name="tomato" />
+				</div>
+			</div>
+				
+			<div class="input_block">
+				<label><b>our infrastructure consists of</b></label></br>
+				<input type="checkbox" name="current_infra" value="co2">CO2 pipeline<br>
+				<input type="checkbox" name="current_infra" checked value="gas">gas<br>
+				<input type="checkbox" name="current_infra" value="geotermal">geotermal<br>
+				<input type="checkbox" name="current_infra" value="heat_net">heat net<br>
+				<input type="checkbox" name="current_infra" value="heat_pump">heat pump<br>
+				<input type="checkbox" name="current_infra" value="solar">solar panels<br>
+			</div>
+
+			<div class="input_block">
+				<label><b>address</b></label>
+				<div class="input_field">
+					<input id="street" 		required placeholder="street name" name="street" />
+					<input id="street_no" 	required placeholder="no."		name="no." />
+				</div>
+				<input class="address" 	required placeholder="zip code" 	name="zip" />
+				<input class="address" 	required placeholder="city" 		name="city" />
+				<input class="address" 	required placeholder="county" 	name="county" />
+			</div>
+
+			<input class="float_right" type="submit" value="submit" />
+		</form>
+	</div>
+</body>
+</html>
