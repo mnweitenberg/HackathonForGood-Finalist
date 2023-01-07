@@ -5,6 +5,9 @@ Greenhouse growers are having a difficulty deciding what to do individually rega
 
 How ​can ​we ​help ​greenhouse growers to make educated and sustainable long-term choices ​by using a decision making/matchmaking tool connecting them to local peers and initiatives ​when managing heating/energy/cooling demands and excess per season ​instead ​of tackling the problem alone or going to a consultant?
 
+## Result
+The jury selected us as the winner of our challenge! In the Finale we had to compete against against the winners of the 4 other challenges. After a long discussion, the jury eventually choose "The North Sea Sharks" with their solution OPEN STAD as the winner of the 5th edition of the Hackathon for Good! Congratulations to: Alexey Budiak, Alexey Udalov, Sergey Kim & Uladzimir Mihura. 
+
 ## Our solution
 ### Short Pitch
 Greennet will help greenhouse growers transition to a more sustainable way of managing their heating, energy, and cooling demands. Based on input from the client, our model will compute the optimal energy solution considering the surrounding energy providers as well as distributing surplus heat. This will arm the client with a clear understanding of the costs and benefits of switching to a more sustainable energy infrastructure and the ability to connect to other growers and companies with compatible needs.
